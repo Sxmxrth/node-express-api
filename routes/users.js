@@ -9,7 +9,7 @@ const users = []
 //all routes in here are starting with /users
 router.get("/", (req, res) => {
     res.send("Hello")
-    // console.log(users);
+    console.log(users);
 })
 
 router.post("/", (req, res) => {
@@ -26,6 +26,17 @@ router.get("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
     console.log(users.filter((user) => user.ID != req.params.id));
     res.send(`Deleted user with ID = ${req.params.id}`)
+})
+
+router.patch("/:id", (req, res) => {
+    let user = users.find((user) => user.ID = req.params.id)
+    let {firstName, lastName, age} = req.body;
+
+    if(firstName) user.firstName = firstName
+    if(lastName) user.lastName = lastName
+    if(age) user.age = age
+
+    res.send(`User with ${req.params.id} has been updated`)
 })
 
 export default router;
